@@ -11,6 +11,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <PackageId>PureQL.CSharp.Model.Graph.Neo4j.Insertion</PackageId>
+    <Description>Inserts PureQL query graphs into Neo4j: one query, one transaction, one batched Cypher statement.</Description>
     <RootNamespace>PureQL.CSharp.Model.Graph.Neo4j.Insertion</RootNamespace>
     <AssemblyName>PureQL.CSharp.Model.Graph.Neo4j.Insertion</AssemblyName>
     <Authors>Dmitry Kurochkin</Authors>
