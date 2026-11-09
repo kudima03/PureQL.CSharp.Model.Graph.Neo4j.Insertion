@@ -2,11 +2,15 @@ version: 2
 updates:
 - package-ecosystem: nuget
   directories:
-    - "src/<repo-name>"
-    - "src/Tests/<repo-name>.Tests"
+    - "src/PureQL.CSharp.Model.Graph.Neo4j.Insertion"
+    - "src/Tests/PureQL.CSharp.Model.Graph.Neo4j.Insertion.Tests"
   schedule:
     interval: daily
 - package-ecosystem: "github-actions"
+  directory: "/"
+  schedule:
+    interval: weekly
+- package-ecosystem: "devcontainers"
   directory: "/"
   schedule:
     interval: weekly

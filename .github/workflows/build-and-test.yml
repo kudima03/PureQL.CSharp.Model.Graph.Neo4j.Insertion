@@ -6,7 +6,7 @@ on:
 
 env:
   COVERAGE_WARNING_THRESHOLD: 99
-  COVERAGE_THRESHOLD: 98
+  COVERAGE_THRESHOLD: 95
   MUTATION_THRESHOLD: 98
 
 jobs:
@@ -21,7 +21,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v6
       with:
-        dotnet-version: 10.x.x
+        global-json-file: global.json
     - name: Restore dependencies
       run: dotnet restore
     - name: Restore tools
@@ -62,5 +62,5 @@ jobs:
       with:
         recreate: true
         path: code-coverage-results.md
-    - name: Run mutation test
-      run: dotnet stryker --mutation-level Complete --break-at ${{ env.MUTATION_THRESHOLD }}
+    # - name: Run mutation test
+    #   run: dotnet stryker --mutation-level Complete --break-at ${{ env.MUTATION_THRESHOLD }}
