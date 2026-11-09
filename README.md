@@ -1,19 +1,31 @@
-# Pure.Template
+# PureQL.CSharp.Model.Graph.Neo4j.Insertion
 
-Project template for new **Pure** ecosystem NuGet libraries.
+Writes a **PureQL** query to Neo4j as a property graph, in one statement.
 
+[![.NET build & test](https://github.com/kudima03/PureQL.CSharp.Model.Graph.Neo4j.Insertion/actions/workflows/build-and-test.yml/badge.svg?branch=main)](https://github.com/kudima03/PureQL.CSharp.Model.Graph.Neo4j.Insertion/actions/workflows/build-and-test.yml)
+[![Build and Deploy](https://github.com/kudima03/PureQL.CSharp.Model.Graph.Neo4j.Insertion/actions/workflows/publish-nuget.yml/badge.svg?branch=main)](https://github.com/kudima03/PureQL.CSharp.Model.Graph.Neo4j.Insertion/actions/workflows/publish-nuget.yml)
+[![NuGet](https://img.shields.io/nuget/v/PureQL.CSharp.Model.Graph.Neo4j.Insertion)](https://www.nuget.org/packages/PureQL.CSharp.Model.Graph.Neo4j.Insertion)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ## Overview
 
-`Pure.Template` is the canonical starting point for new Pure ecosystem packages. It ships with a pre-configured project structure, `.editorconfig`, GitHub Actions workflows for build/test and NuGet publish, and standard `CODEOWNERS` and `CODE_OF_CONDUCT.md` files — so a new library can be bootstrapped consistently without manually copying configuration from another repo.
+`PureQL.CSharp.Model.Graph.Neo4j.Insertion` is the insertion package of the `PureQL.CSharp.Model.Graph` family. It turns the `QueryGraph` that [`PureQL.CSharp.Model.Graph`](https://github.com/kudima03/PureQL.CSharp.Model.Graph) builds for a query into a single Cypher statement that creates every node and every relationship of the query at once.
 
-## What's included
+## Public API
 
-| Item | Description |
+Namespace `PureQL.CSharp.Model.Graph.Neo4j.Insertion`:
+
+| Name | Description |
 |------|-------------|
-| `.editorconfig` | Shared code style rules for the Pure ecosystem |
-| `CODEOWNERS` | Default ownership configuration |
-| `CODE_OF_CONDUCT.md` | Contributor code of conduct |
-| `.github/workflows/build-and-test.yml` | CI workflow: restore, build, and test on every push |
-| `.github/workflows/publish-nuget.yml` | Publish workflow: triggered on git tag push |
+| `InsertStatement` | `sealed record InsertStatement(QueryGraph Graph)`; `Value` is the `Neo4j.Driver.Query` that writes the graph |
+
+## Installation
+
+```
+dotnet add package PureQL.CSharp.Model.Graph.Neo4j.Insertion
+```
+
+## Related packages
+
+- [`PureQL.CSharp.Model.Graph`](https://github.com/kudima03/PureQL.CSharp.Model.Graph) — maps a `PureQLQuery` to a property graph and back, without a driver
+- [`PureQL.CSharp.Model.Graph.Neo4j.Abstractions`](https://github.com/kudima03/PureQL.CSharp.Model.Graph.Neo4j.Abstractions) — the stored-queries contract the Neo4j packages share
