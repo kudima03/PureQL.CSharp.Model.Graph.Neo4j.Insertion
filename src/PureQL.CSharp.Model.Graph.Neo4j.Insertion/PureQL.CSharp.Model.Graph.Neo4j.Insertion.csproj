@@ -7,7 +7,7 @@
     <IsAotCompatible>true</IsAotCompatible>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <EnablePackageValidation>true</EnablePackageValidation>
-    <PackageValidationBaselineVersion>0.1.0-preview.0.1.0</PackageValidationBaselineVersion>
+    <PackageValidationBaselineVersion>0.1.0-preview.0.2.0</PackageValidationBaselineVersion>
   </PropertyGroup>
   <PropertyGroup>
     <PackageId>PureQL.CSharp.Model.Graph.Neo4j.Insertion</PackageId>
