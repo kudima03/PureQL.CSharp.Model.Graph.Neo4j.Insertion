@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0-preview.0.2.0] - 2026-11-11
+
+### Changed
+
+- Targets .NET 11 with the GA SDK; the SDK is installed by version in the
+  build and publish workflows instead of `global.json`.
+- Depends on `PureQL.CSharp.Model.Graph` `0.1.0-preview.1.1.0` and
+  `PureQL.CSharp.Model.Graph.Neo4j.Abstractions` `0.1.0-preview.1.1.0`.
+
 ## [0.1.0-preview.0.1.0] - 2026-11-09
 
 First release: writes a stored PureQL query graph to Neo4j in one statement.
