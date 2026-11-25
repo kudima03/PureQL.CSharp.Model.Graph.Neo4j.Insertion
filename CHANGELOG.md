@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Tested with every query of `PureQL.CSharp.Model.Samples` `0.1.0-preview.4.1.0`
+  (386, was 151: every sample and test of the specification it mirrors, the deepest
+  queries included). The package is unchanged.
+
 ## [0.1.0-preview.1.0.0] - 2026-11-25
 
 Follows `PureQL.CSharp.Model` `0.1.0-preview.15.0.0` (PureQL specification
