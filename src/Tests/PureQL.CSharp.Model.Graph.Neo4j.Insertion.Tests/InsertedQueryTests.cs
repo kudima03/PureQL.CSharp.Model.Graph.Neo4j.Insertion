@@ -2,6 +2,7 @@ using Neo4j.Driver;
 using PureQL.CSharp.Model.Graph.Neo4j.Abstractions;
 using PureQL.CSharp.Model.Samples.Queries.Joins;
 using PureQL.CSharp.Model.Samples.Queries.Select;
+using PureQL.CSharp.Model.Samples.Queries.Subqueries;
 
 namespace PureQL.CSharp.Model.Graph.Neo4j.Insertion.Tests;
 
@@ -13,7 +14,7 @@ public sealed class InsertedQueryTests(Neo4jFixture neo4j)
     [Fact]
     public void EverySampleIsLoaded()
     {
-        Assert.Equal(86, QuerySamples.All.Count);
+        Assert.Equal(151, QuerySamples.All.Count);
     }
 
     [Theory]
@@ -120,6 +121,52 @@ public sealed class InsertedQueryTests(Neo4jFixture neo4j)
         Assert.Contains(records, r => r["v"] is string);
         Assert.Contains(records, r => r["v"] is long);
         Assert.Contains(records, r => r["v"] is bool);
+    }
+
+    [Fact]
+    public async Task StoresEachInlineRowAsAListNodeOfTheQuery()
+    {
+        StoredQuery query = new StoredQuery(
+            Guid.NewGuid(),
+            new InlineStatusRowsQuery().Value
+        );
+        QueryGraph graph = QueryGraphs.Of(query.Query, query.Id);
+
+        await InsertAsync(query);
+        List<IRecord> records = await _neo4j.RunAsync(
+            """
+            MATCH (:SubqueryRows:Node {queryId: $id})-[r:Rows]->(row {queryId: $id})
+            RETURN labels(row) AS labels, r.position AS position,
+                COUNT { (row)-[:Rows]->() } AS items
+            ORDER BY position
+            """,
+            query.Id
+        );
+
+        Assert.NotEmpty(records);
+        Assert.Equal(
+            graph
+                .Relationships.Where(r =>
+                    (r.Type == nameof(SubqueryRows.Rows))
+                    && graph.Nodes[r.From].Labels.Contains(nameof(SubqueryRows))
+                )
+                .OrderBy(r => r.Position)
+                .Select(r =>
+                    (
+                        r.Position,
+                        (long)graph.Relationships.Count(item => item.From == r.To)
+                    )
+                ),
+            records.Select(r => (r["position"].As<long?>(), r["items"].As<long>()))
+        );
+        Assert.All(
+            records,
+            r =>
+                Assert.Equal(
+                    [GraphLabels.List, GraphLabels.Node],
+                    r["labels"].As<List<string>>().Order(StringComparer.Ordinal)
+                )
+        );
     }
 
     [Fact]
