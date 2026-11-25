@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0-preview.1.0.0] - 2026-11-25
+
 Follows `PureQL.CSharp.Model` `0.1.0-preview.15.0.0` (PureQL specification
 `0.1.0-preview.3.0.0`). The public API is unchanged. Graphs written by an earlier
 version are not read back: drop them and insert the queries again.
