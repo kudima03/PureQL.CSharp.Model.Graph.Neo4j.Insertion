@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+Follows `PureQL.CSharp.Model` `0.1.0-preview.15.0.0` (PureQL specification
+`0.1.0-preview.3.0.0`). The public API is unchanged. Graphs written by an earlier
+version are not read back: drop them and insert the queries again.
+
+### Changed
+
+- **Breaking:** depends on `PureQL.CSharp.Model.Graph` `0.1.0-preview.2.0.0` and
+  `PureQL.CSharp.Model.Graph.Neo4j.Abstractions` `0.1.0-preview.2.0.0`, both on
+  `PureQL.CSharp.Model` `0.1.0-preview.15.0.0`. The statement writes the nodes and
+  relationships of the new graph shape as it writes every other: the rows of inline rows
+  (`SubqueryRows.Rows`) as nodes labelled `List` and `Node` with `queryId`, linked by
+  `Rows` relationships with a `position`, and the renamed labels and relationships of
+  Graph `0.1.0-preview.2.0.0`.
+- Tested with every query of `PureQL.CSharp.Model.Samples` `0.1.0-preview.4.0.0` (151,
+  combined, window, inline-rows and recursive queries included), read back through
+  `PureQL.CSharp.Model.Serialization` `0.1.0-preview.7.0.0`.
+
 ## [0.1.0-preview.0.2.0] - 2026-11-11
 
 ### Changed

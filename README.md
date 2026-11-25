@@ -69,7 +69,7 @@ CREATE (a)-[e:$(r.type)]->(b)
 SET e.position = r.position
 ```
 
-- `$nodes` holds each node's `labels` (the record label, `Node`, and `Query` on the root) and `props`; property values pass through unchanged (strings, longs, booleans and arrays of them). Every node has `queryId`; the root also has `id`.
+- `$nodes` holds each node's `labels` (the record label, `Node`, and `Query` on the root; a row of inline rows, `SubqueryRows.Rows`, is a node labelled `List` and `Node`, linked to the `SubqueryRows` node and to its items by `Rows` relationships with a `position`) and `props`; property values pass through unchanged (strings, longs, booleans and arrays of them). Every node has `queryId`; the root also has `id`.
 - `$rels` holds each relationship's node indexes `f` and `t`, its `type` and, on a list item only, its `position`; a single child's relationship has no `position`.
 - Labels and relationship types are dynamic (`$(...)`), which needs **Neo4j 5.26 or later** (`neo4j:5-community` and `neo4j:2025-community` both work).
 
@@ -89,9 +89,11 @@ Inserting only creates; it never replaces a stored query (the Updating package d
 
 ## Dependencies
 
-- [`PureQL.CSharp.Model.Graph`](https://github.com/kudima03/PureQL.CSharp.Model.Graph) `0.1.0-preview.1.1.0` — `QueryGraphs`, `QueryGraph`
-- [`PureQL.CSharp.Model.Graph.Neo4j.Abstractions`](https://github.com/kudima03/PureQL.CSharp.Model.Graph.Neo4j.Abstractions) `0.1.0-preview.1.1.0` — `INeo4jStoredQueries`, `StoredQuery`
+- [`PureQL.CSharp.Model.Graph`](https://github.com/kudima03/PureQL.CSharp.Model.Graph) `0.1.0-preview.2.0.0` — `QueryGraphs`, `QueryGraph`
+- [`PureQL.CSharp.Model.Graph.Neo4j.Abstractions`](https://github.com/kudima03/PureQL.CSharp.Model.Graph.Neo4j.Abstractions) `0.1.0-preview.2.0.0` — `INeo4jStoredQueries`, `StoredQuery`
 - [`Neo4j.Driver`](https://www.nuget.org/packages/Neo4j.Driver) `6.5.1`
+
+Both PureQL packages are on [`PureQL.CSharp.Model`](https://github.com/kudima03/PureQL.CSharp.Model) `0.1.0-preview.15.0.0` (PureQL specification `0.1.0-preview.3.0.0`). Graphs written by an earlier version are not read back by the Graph package: drop them and insert the queries again.
 
 ## Target Frameworks
 
